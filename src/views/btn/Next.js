@@ -1,10 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import Stack from "../Logic/StackLogic";
 class Next extends React.Component {
     constructor(props) {
         super(props)
         this.set = false
+        this.stack = new Stack();
     }
     checkId(id) {
         let { arrNodes } = this.props
@@ -17,27 +19,34 @@ class Next extends React.Component {
     handleButtonClick = () => {
         let { roads, stack, arrNodes } = this.props
         if ((stack.length === 0) && roads.length !== 0 && this.set === false) {
-            let arr = []
-            arr = [...arr, arrNodes[0].id]
-            this.props.setStack(arr)
+            //let arr = []
+            // arr = [...arr, arrNodes[0].id]
+            // this.props.setStack(arr)
+            this.stack.push(arrNodes[0].id);
+            this.props.setStack(this.stack.toArr());
             this.props.changeCheck(arrNodes[0].id, arrNodes)
             this.set = true
         }
+        // console.log(this.stack.toArr());
         if (stack.length !== 0) {
             // for (let i = 0; i < roads.length; i++) 
             for (let i = 0; i < arrNodes.length; i++) {
-                if (this.checkHasRoad(arrNodes[i].id, stack[stack.length - 1])) {
+                if (this.checkHasRoad(arrNodes[i].id, this.stack.peek()/*stack[stack.length - 1]*/)) {
                     if (this.checkId(arrNodes[i].id) === false) {
-                        this.props.setStack([...stack, arrNodes[i].id])
+                        this.props.addKq(this.stack.peek()/*stack[stack.length - 1]*/, arrNodes[i].id)
+                        this.stack.push(arrNodes[i].id);
+                        this.props.setStack(this.stack.toArr())
+                        // this.props.setStack([...stack, arrNodes[i].id])
                         this.props.changeCheck(arrNodes[i].id, arrNodes)
-                        this.props.addKq(stack[stack.length - 1], arrNodes[i].id)
                         return
                     }
                 }
             }
-            let arr = stack;
-            arr.pop()
-            this.props.setStack(arr);
+            // let arr = stack;
+            // arr.pop()
+            this.stack.pop();
+            this.props.setStack(this.stack.toArr());
+            // this.props.setStack(arr);
         }
     }
     checkHasRoad = (source, target) => {

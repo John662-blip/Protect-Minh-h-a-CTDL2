@@ -12,7 +12,6 @@ class MyComponent extends React.Component {
             stack: [],
             arrNodes: [],
             kq: [],
-
         }
     }
     addRoad = (road) => {
