@@ -15,7 +15,6 @@ class Input extends Component {
     };
 
     checkForTree(data) {
-        // Tạo một đồ thị bằng cách sử dụng danh sách kề
         const graph = new Map();
 
         for (const { source, target } of data) {
@@ -29,17 +28,12 @@ class Input extends Component {
             }
             graph.get(target).push(source);
         }
-
-        // Kiểm tra xem đồ thị có chu trình không bằng BFS
         const visited = new Set();
         const queue = [];
-
-        queue.push(1); // Bắt đầu từ một đỉnh bất kỳ
-
+        queue.push(1);
         while (queue.length > 0) {
             const node = queue.shift();
             visited.add(node);
-
             for (const neighbor of graph.get(node)) {
                 if (!visited.has(neighbor)) {
                     queue.push(neighbor);
@@ -48,10 +42,10 @@ class Input extends Component {
         }
 
         if (visited.size !== graph.size) {
-            return false; // Đồ thị có chu trình
+            return false;
         }
 
-        return true; // Đủ liên thông và không có chu trình
+        return true;
     }
 
     checkExist(a, arr) {

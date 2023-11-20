@@ -38,7 +38,7 @@ class GraphVisualization extends Component {
             .force('link', d3.forceLink(linksData).id(d => d.id))
             .force('charge', d3.forceManyBody().strength(-800))
             .force('center', d3.forceCenter(width / 2, height / 2))
-            .alphaTarget(1)
+            .alphaTarget(0.005)
 
         const links = svg.selectAll('line')
             .data(linksData)
