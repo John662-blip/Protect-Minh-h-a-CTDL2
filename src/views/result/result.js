@@ -8,7 +8,7 @@ class Result extends React.Component {
                 <div className="col-6 text-center mx-auto">
                     <div className="alert alert-primary">
                         {kq && kq.map((item) => {
-                            return item.source + "->" + item.target + "  "
+                            return item.source + "-" + item.target + "  "
                         })}
                     </div>
                 </div>
