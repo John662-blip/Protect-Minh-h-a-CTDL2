@@ -62,7 +62,7 @@ class MyComponent extends React.Component {
                 {
                     (this.state.roads.length !== 0) &&
                     <div>
-                        <GraphVisualization kq={this.state.kq} arrNodes={this.state.arrNodes} roads={this.state.roads} />
+                        <GraphVisualization kq={this.state.kq} stack={this.state.stack} arrNodes={this.state.arrNodes} roads={this.state.roads} />
                     </div>
                 }
                 {(this.state.roads.length !== 0) && <Stack stack={this.state.stack} />}

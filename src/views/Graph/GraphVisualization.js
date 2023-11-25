@@ -80,6 +80,8 @@ class GraphVisualization extends Component {
     }
     checkArrNode(d, arr) {
         const nodeInfo = arr.find(item => item.id === d.id);
+        let { stack } = this.props
+        if (stack.length !== 0 && stack[stack.length - 1] === d.id) return "pink";
         if (nodeInfo && nodeInfo.check) {
             return "green";
         }

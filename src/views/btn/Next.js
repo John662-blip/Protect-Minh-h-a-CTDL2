@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import Stack from "../Logic/StackLogic";
+import ButtonManager from "../ButtonManager ";
 class Next extends React.Component {
     constructor(props) {
         super(props)
@@ -16,7 +17,7 @@ class Next extends React.Component {
         return true
 
     }
-    handleButtonClick = () => {
+    LogicBFS = () => {
         let { roads, stack, arrNodes } = this.props
         if ((stack.length === 0) && roads.length !== 0 && this.set === false) {
             //let arr = []
@@ -49,6 +50,19 @@ class Next extends React.Component {
             // this.props.setStack(arr);
         }
     }
+    handleButtonClick = (Event) => {
+        let { roads } = this.props
+        if (roads.length !== 0) {
+            ButtonManager.setDisableButtons(true)
+            this.forceUpdate()
+        } else return
+        this.intervalId = setInterval(() => {
+            this.LogicBFS()
+            if (this.stack.isEmpty()) {
+                clearInterval(this.intervalId);
+            }
+        }, 500);
+    }
     checkHasRoad = (source, target) => {
         let { roads } = this.props;
         for (let i = 0; i < roads.length; i++)
@@ -58,7 +72,7 @@ class Next extends React.Component {
     }
     render() {
         return (
-            <button className="btn btn-primary" onClick={(Event) => this.handleButtonClick(Event)}  >
+            <button disabled={ButtonManager.disableButtons} className="btn btn-primary" onClick={(Event) => this.handleButtonClick(Event)}  >
                 <FontAwesomeIcon icon={faAnglesRight} />
             </button>
         )

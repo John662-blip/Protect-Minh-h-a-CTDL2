@@ -1,12 +1,10 @@
-import React from "react";
-
 class Stack {
     constructor() {
         this.arr = [];
         this.top = -1;
     }
     isEmpty() {
-        return this.top == -1;
+        return this.top === -1;
     }
     push(value) {
         this.top++;

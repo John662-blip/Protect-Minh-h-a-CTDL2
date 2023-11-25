@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import ButtonManager from '../ButtonManager ';
 class Input extends Component {
     constructor(props) {
         super(props);
@@ -95,8 +95,8 @@ class Input extends Component {
     render() {
         return (
             <div>
-                <input type="file" onChange={this.handleFileChange} />
-                <button onClick={this.handleUpload}>Save</button>
+                <input disabled={ButtonManager.disableButtons} type="file" onChange={this.handleFileChange} />
+                <button onClick={this.handleUpload} disabled={ButtonManager.disableButtons}>Save</button>
             </div>
         );
     }
