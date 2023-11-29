@@ -25,6 +25,7 @@ class GraphVisualization extends Component {
         svg.selectAll('*').remove();
     }
     renderGraph() {
+
         const width = window.innerWidth;
         const height = window.innerHeight * 60 / 100;
         const svg = d3.select(this.graphContainerRef)
@@ -72,6 +73,7 @@ class GraphVisualization extends Component {
                 .attr('transform', d => `translate(${d.x},${d.y})`)
             this.updateNodeColors(nodes)
         });
+
     }
     checkArrRoad(d, road) {
         const roadId = road.find(item => ((item.source === d.source.id && item.target === d.target.id) || (item.source === d.target.id && item.target === d.source.id)))
@@ -81,7 +83,7 @@ class GraphVisualization extends Component {
     checkArrNode(d, arr) {
         const nodeInfo = arr.find(item => item.id === d.id);
         let { stack } = this.props
-        if (stack.length !== 0 && stack[stack.length - 1] === d.id) return "pink";
+        if (stack.length !== 0 && stack[stack.length - 1] === d.id) return "orange";
         if (nodeInfo && nodeInfo.check) {
             return "green";
         }
