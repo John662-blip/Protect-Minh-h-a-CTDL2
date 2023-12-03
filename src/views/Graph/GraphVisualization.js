@@ -14,7 +14,12 @@ class GraphVisualization extends Component {
         this.graphContainerRef = this.graphContainerRef.current;
         this.renderGraph();
     }
-
+    findInArr(val) {
+        let { arr } = this.props;
+        for (let i = 0; i < arr.length; i++)
+            if (val === arr[i]) return true;
+        return false;
+    }
     updateNodeColors(nodes) {
 
         nodes.attr('fill', d => this.checkArrNode(d, this.props.arrNodes))
@@ -83,7 +88,12 @@ class GraphVisualization extends Component {
     checkArrNode(d, arr) {
         const nodeInfo = arr.find(item => item.id === d.id);
         let { stack } = this.props
-        if (stack.length !== 0 && stack[stack.length - 1] === d.id) return "orange";
+        if (stack.length !== 0 && stack[stack.length - 1] === d.id) {
+            if (!this.findInArr(stack[stack.length - 1])) {
+                return "orange"
+            }
+            //    return "pink"
+        }
         if (nodeInfo && nodeInfo.check) {
             return "green";
         }

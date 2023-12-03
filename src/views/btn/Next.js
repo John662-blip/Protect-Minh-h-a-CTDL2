@@ -19,6 +19,8 @@ class Next extends React.Component {
     }
     LogicBFS = () => {
         let { roads, stack, arrNodes } = this.props
+        if (!this.stack.isEmpty())
+            this.props.addArr(this.stack.peek());
         if ((stack.length === 0) && roads.length !== 0 && this.set === false) {
             this.stack.push(arrNodes[0].id);
             this.props.setStack(this.stack.toArr());

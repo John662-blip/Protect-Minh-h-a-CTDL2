@@ -12,7 +12,13 @@ class MyComponent extends React.Component {
             stack: [],
             arrNodes: [],
             kq: [],
+            arr: []
         }
+    }
+    addArr = (value) => {
+        this.setState({
+            arr: [...this.state.arr, value]
+        })
     }
     addRoad = (road) => {
         this.setState({
@@ -55,14 +61,14 @@ class MyComponent extends React.Component {
                         <Input setArrNodes={this.setArrNodes} addRoad={this.addRoad} />
                     </div>
                     <div style={{ marginLeft: "15px" }}>
-                        <Next addKq={this.addKq} changeCheck={this.changeCheck} setStack={this.setStack} roads={this.state.roads} stack={this.state.stack} arrNodes={this.state.arrNodes} />
+                        <Next addArr={this.addArr} addKq={this.addKq} changeCheck={this.changeCheck} setStack={this.setStack} roads={this.state.roads} stack={this.state.stack} arrNodes={this.state.arrNodes} />
                     </div>
                 </div>
                 {(this.state.roads.length !== 0) && <Result kq={this.state.kq} />}
                 {
                     (this.state.roads.length !== 0) &&
                     <div>
-                        <GraphVisualization kq={this.state.kq} stack={this.state.stack} arrNodes={this.state.arrNodes} roads={this.state.roads} />
+                        <GraphVisualization arr={this.state.arr} kq={this.state.kq} stack={this.state.stack} arrNodes={this.state.arrNodes} roads={this.state.roads} />
                     </div>
                 }
                 {(this.state.roads.length !== 0) && <Stack stack={this.state.stack} />}
