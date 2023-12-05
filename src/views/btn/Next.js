@@ -18,15 +18,7 @@ class Next extends React.Component {
 
     }
     LogicBFS = () => {
-        let { roads, stack, arrNodes } = this.props
-        if (!this.stack.isEmpty())
-            this.props.addArr(this.stack.peek());
-        if ((stack.length === 0) && roads.length !== 0 && this.set === false) {
-            this.stack.push(arrNodes[0].id);
-            this.props.setStack(this.stack.toArr());
-            this.props.changeCheck(arrNodes[0].id, arrNodes)
-            this.set = true
-        }
+        let { stack, arrNodes } = this.props
         if (stack.length !== 0) {
             for (let i = 0; i < arrNodes.length; i++) {
                 if (this.checkHasRoad(arrNodes[i].id, this.stack.peek())) {
@@ -44,11 +36,15 @@ class Next extends React.Component {
         }
     }
     handleButtonClick = (Event) => {
-        let { roads } = this.props
+        let { roads, arrNodes } = this.props
         if (roads.length !== 0) {
             ButtonManager.setDisableButtons(true)
             this.forceUpdate()
         } else return
+
+        this.stack.push(arrNodes[0].id);
+        this.props.setStack(this.stack.toArr());
+        this.props.changeCheck(arrNodes[0].id, arrNodes)
         this.intervalId = setInterval(() => {
             this.LogicBFS()
             if (this.stack.isEmpty()) {

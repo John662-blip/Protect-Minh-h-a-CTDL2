@@ -14,7 +14,7 @@ class Input extends Component {
         this.setState({ selectedFile: file });
     };
 
-    checkForTree(data) {
+    checkForTree(data, value) {
         const graph = new Map();
 
         for (const { source, target } of data) {
@@ -30,7 +30,7 @@ class Input extends Component {
         }
         const visited = new Set();
         const queue = [];
-        queue.push(1);
+        queue.push(value);
         while (queue.length > 0) {
             const node = queue.shift();
             visited.add(node);
@@ -68,8 +68,7 @@ class Input extends Component {
                         fileData.push({ source, target });
                     }
                 })
-                console.log(fileData)
-                if (this.checkForTree(fileData)) {
+                if (this.checkForTree(fileData, fileData[0].source)) {
                     this.props.addRoad(fileData)
                     let arr = []
                     fileData.forEach((item) => {
