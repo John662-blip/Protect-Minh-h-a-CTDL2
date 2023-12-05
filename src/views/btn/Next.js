@@ -17,7 +17,7 @@ class Next extends React.Component {
         return true
 
     }
-    LogicBFS = () => {
+    Logic = () => {
         let { stack, arrNodes } = this.props
         if (stack.length !== 0) {
             for (let i = 0; i < arrNodes.length; i++) {
@@ -46,7 +46,7 @@ class Next extends React.Component {
         this.props.setStack(this.stack.toArr());
         this.props.changeCheck(arrNodes[0].id, arrNodes)
         this.intervalId = setInterval(() => {
-            this.LogicBFS()
+            this.Logic()
             if (this.stack.isEmpty()) {
                 clearInterval(this.intervalId);
             }
