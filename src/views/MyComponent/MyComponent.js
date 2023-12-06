@@ -64,7 +64,7 @@ class MyComponent extends React.Component {
                         <Next addArr={this.addArr} addKq={this.addKq} changeCheck={this.changeCheck} setStack={this.setStack} roads={this.state.roads} stack={this.state.stack} arrNodes={this.state.arrNodes} />
                     </div>
                 </div>
-                {(this.state.roads.length !== 0) && <Result kq={this.state.kq} />}
+                {(this.state.roads.length !== 0) && <Result arrNodes={this.state.arrNodes} kq={this.state.kq} />}
                 {
                     (this.state.roads.length !== 0) &&
                     <div>
