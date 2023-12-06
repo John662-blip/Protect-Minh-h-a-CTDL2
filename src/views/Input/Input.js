@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import ButtonManager from '../ButtonManager ';
 class Input extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedFile: null,
         };
-        this.clicked = false
+        this.button = false;
     }
 
     handleFileChange = (event) => {
-        const file = event.target.files[0];
+        let file = null;
+        file = event.target.files[0];
         this.setState({ selectedFile: file });
     };
 
@@ -55,12 +55,12 @@ class Input extends Component {
     }
     handleUpload = () => {
         const { selectedFile } = this.state;
-        if (selectedFile && !this.clicked) {
+        if (selectedFile) {
             const reader = new FileReader()
             reader.onload = (e) => {
                 const fileContent = e.target.result;
                 const lines = fileContent.split('\n');
-                const fileData = [];
+                let fileData = [];
 
                 lines.forEach((line) => {
                     const [source, target] = line.split(' ').map(Number);
@@ -68,6 +68,13 @@ class Input extends Component {
                         fileData.push({ source, target });
                     }
                 })
+                try {
+                    if (fileData[0].source);
+                }
+                catch (e) {
+                    alert("Ko the doc file")
+                    return
+                }
                 if (this.checkForTree(fileData, fileData[0].source)) {
                     this.props.addRoad(fileData)
                     let arr = []
@@ -83,19 +90,21 @@ class Input extends Component {
                                 arr[j] = tam;
                             }
                     this.props.setArrNodes(arr)
+                    this.button = true;
                 }
                 else alert("Khong The Tao Cay Khung")
 
             }
             reader.readAsText(selectedFile)
-            this.clicked = true
-        };
+        }
     }
+
+
     render() {
         return (
             <div>
-                <input disabled={ButtonManager.disableButtons} type="file" onChange={this.handleFileChange} />
-                <button onClick={this.handleUpload} disabled={ButtonManager.disableButtons}>Save</button>
+                <input disabled={this.button} type="file" onChange={(event) => this.handleFileChange(event)} />
+                <button onClick={this.handleUpload} disabled={this.button}>Save</button>
             </div>
         );
     }

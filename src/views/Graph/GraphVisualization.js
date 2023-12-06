@@ -29,7 +29,6 @@ class GraphVisualization extends Component {
         svg.selectAll('*').remove();
     }
     renderGraph() {
-
         const width = window.innerWidth;
         const height = window.innerHeight * 60 / 100;
         const svg = d3.select(this.graphContainerRef)
